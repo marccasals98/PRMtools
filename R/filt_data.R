@@ -7,7 +7,7 @@
 #'
 #'
 #' @param df the Dataframe that you introduced from the function haven::read_sav()
-#' @param variable_list the variables that we want to filter.
+#' @param variables_list the variables that we want to filter.
 #' @param max_times The number of maximum times that a code can appear.
 #' @param codes_list The array of codes that we want to filter.
 #'

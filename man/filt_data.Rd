@@ -9,11 +9,11 @@ filt_data(df, variables_list, max_times, codes_list)
 \arguments{
 \item{df}{the Dataframe that you introduced from the function haven::read_sav()}
 
+\item{variables_list}{the variables that we want to filter.}
+
 \item{max_times}{The number of maximum times that a code can appear.}
 
 \item{codes_list}{The array of codes that we want to filter.}
-
-\item{variable_list}{the variables that we want to filter.}
 }
 \value{
 returns the df without these rows.
