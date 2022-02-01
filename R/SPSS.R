@@ -24,7 +24,8 @@ COUNT <- function(df,variables_list, codes){
 }
 
 
-#' FRE
+#' FRE (FREQUENCIES)
+#'
 #' This function replicates the FREQUENCIES function of SPSS. It accepts a
 #' dataframe and returns a table in the format of a dataframe with the number of
 #' cases and the propotion.
