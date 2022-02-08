@@ -1,9 +1,9 @@
-#' COUNT
+#' count
 #'
-#' This function replicates the count function in SPSS, it counts the times that
+#' It counts the times that
 #' some codes appear in some variables and adds them up.
-#' @param df the Dataframe that you introduced from the function haven::read_sav()
-#' @param variables_list the variables whose values we want to count
+#'
+#' @param x the vector of the variables whose values we want to count
 #' @param codes The array of codes that we want to count
 #'
 #' @return returns an integer with the value of the count.
@@ -11,49 +11,45 @@
 #' p15_1 <- c(0, 2, 3, 99, 99, 99, 2)
 #' p15_2 <- c(1, 2, 5, 3, 4, 52, 2)
 #' data_frame <- data.frame(p15_1, p15_2)
-#' COUNT(data_frame, c("p15_1","p15_2"), c(99,2))
+#' count(data_frame[, c("p15_1","p15_2")], c(99,2))
 #' @export
 
 
-COUNT <- function(df,variables_list, codes){
+count <- function(x, codes){
   total_sum <- 0
   for (code in codes){
-  total_sum = total_sum + sum(df[,variables_list]==code)
+    total_sum = total_sum + sum(x==code)
   }
   return(total_sum)
 }
 
 
-#' FRE (FREQUENCIES)
+#' frec
 #'
-#' This function replicates the FREQUENCIES function of SPSS. It accepts a
-#' dataframe and returns a table in the format of a dataframe with the number of
-#' cases and the propotion.
+#'This function returns a table which first column is the frequencies of the event
+#'and the second column is the percentatge of this frequencies.
 #'
-#' @param df the Dataframe that you introduced from the function haven::read_sav()
-#' @param variable the variable we want to see the frequencies
+#' @param x is the vector that counts how many times an event has occured
+#' @param w is a vector of the weight.
 #'
-#' @return returns a dataframe whose columns are the rows of the tables.
+#' @return returns a vector with all of the information (it's a cbind of the table
+#' and the prop.table).
 #'
 #' @examples
 #' p15_1 <- c(0, 2, 3, 99, 99, 99, 2)
 #' p15_2 <- c(1, 2, 5, 3, 4, 52, 2)
+#' weight <- c(200,400,50,200,100,300,90)
 #' data_frame <- data.frame(p15_1, p15_2)
-#' FRE(data_frame,"p15_1")
+#' frec(data_frame[,"p15_1"],weight)
 #'
 #' @export
 
-FRE <- function(df, variable){
-  table_frame <- data.frame(table(df[,variable]),
-                            as.vector(prop.table(table(df[,variable]))*100))
-  colnames(table_frame) <- c("Valores", "Frecuencia", "Porcentaje")
-  return(table_frame)
+frec <- function(x,w){
+  observaciones <- tapply(w,x,sum)
+  porcentaje <- prop.table(observaciones)*100
+  table<-cbind(observaciones,porcentaje)
+  return(table)
 }
-
-
-
-
-
 
 
 
