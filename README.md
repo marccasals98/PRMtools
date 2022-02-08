@@ -10,6 +10,7 @@ It is designed by PRM.
  than 12 times.
 
 ## SPSS functions:
+These functions try to approximate the way that SPSS work.
 
 - COUNT: Replicates COUNT function.
 - FRE: Replicates the FREQUENCIES function.

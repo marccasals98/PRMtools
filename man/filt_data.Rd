@@ -4,35 +4,37 @@
 \alias{filt_data}
 \title{Filter the Data}
 \usage{
-filt_data(df, variables_list, max_times, codes_list)
+filt_data(variables_list, max_times, codes_list)
 }
 \arguments{
-\item{df}{the Dataframe that you introduced from the function haven::read_sav()}
-
-\item{variables_list}{the variables that we want to filter.}
+\item{variables_list}{the variables that we want to filter.
+Let df be a dataframe, the variable_list will be df[,questions_to_filter].}
 
 \item{max_times}{The number of maximum times that a code can appear.}
 
 \item{codes_list}{The array of codes that we want to filter.}
 }
 \value{
-returns the df without these rows.
+returns an array with boolean variables that remark which columns are
+NOT to be removed
 }
 \description{
-This function removes the answers that have said one specific code more times
-that max_times. For example, in a poll we descart people who said 'Ns/Nr' more
-than 12 times.
+This function is used to subset your dataframe if you want to remove some rows
+which some speciefic code appears more than max_times.
+}
+\details{
+For example: If you are doing a poll and a person is saying "DK/NA" multiple
+times. It is normal to invalid this opinion. With this function you can subset
+your dataset easily.
 }
 \examples{
-#Basic usage
 p15_1 <- c(0, 2, 3, 99, 99, 99, 2)
-p15_2 <- c(1, 2, 5, 3, 4, 52, 2)
+p15_2 <- c(1, 2, 5, 99, 4, 52, 2)
 data_frame <- data.frame(p15_1, p15_2)
-data_frame_output <- filt_data(
-  df = data_frame,
-  variables_list = c ("p15_1", "p15_2"),
-  max_times =  2,
-  codes_list =  c(97, 98, 99)
-)
+data_frame_output <-data_frame[ filt_data(
+  variables_list = data_frame[,c ("p15_1", "p15_2")],
+  max_times =  1,
+  codes_list =   99
+),]
 
 }
